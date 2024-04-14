@@ -1,33 +1,34 @@
 package at.fhv.lab1.commandclient.commands;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class BookRoomCommand {
-    private int customerId;
-    private int roomId;
+    private UUID customerId;
+    private UUID roomId;
     private Date startDate;
     private Date endDate;
 
-    public BookRoomCommand(int customerId, int roomId, Date startDate, Date endDate) {
+    public BookRoomCommand(UUID customerId, UUID roomId, Date startDate, Date endDate) {
         this.customerId = customerId;
         this.roomId = roomId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public int getCustomerId() {
+    public UUID getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(UUID customerId) {
         this.customerId = customerId;
     }
 
-    public int getRoomId() {
+    public UUID getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(UUID roomId) {
         this.roomId = roomId;
     }
 

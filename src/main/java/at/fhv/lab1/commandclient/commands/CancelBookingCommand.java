@@ -1,17 +1,19 @@
 package at.fhv.lab1.commandclient.commands;
 
-public class CancelBookingCommand {
-    private int bookingId;
+import java.util.UUID;
 
-    public CancelBookingCommand(int bookingId) {
+public class CancelBookingCommand {
+    private UUID bookingId;
+
+    public CancelBookingCommand(UUID bookingId) {
         this.bookingId = bookingId;
     }
 
-    public int getBookingId() {
+    public UUID getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(UUID bookingId) {
         this.bookingId = bookingId;
     }
 

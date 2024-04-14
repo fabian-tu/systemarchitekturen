@@ -19,6 +19,4 @@ public class Event {
                 "timestamp=" + timestamp +
                 '}';
     }
-
-
 }

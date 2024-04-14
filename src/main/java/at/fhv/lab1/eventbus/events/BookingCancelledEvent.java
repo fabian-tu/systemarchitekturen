@@ -1,40 +1,20 @@
 package at.fhv.lab1.eventbus.events;
 
-import java.util.Date;
+import java.util.UUID;
 
 public class BookingCancelledEvent extends Event {
-    private int bookingId;
-    private Date startDate;
-    private Date endDate;
+    private UUID bookingId;
 
-    public BookingCancelledEvent(int bookingId, Date startDate, Date endDate) {
+    public BookingCancelledEvent(UUID bookingId) {
         this.bookingId = bookingId;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
-    public int getBookingId() {
+    public UUID getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(UUID bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     @Override
@@ -42,8 +22,6 @@ public class BookingCancelledEvent extends Event {
         return "BookingCancelledEvent{" +
                 "type=" + getType() +
                 ", bookingId=" + bookingId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
                 ", timestamp=" + getTimestamp() +
                 '}';
     }

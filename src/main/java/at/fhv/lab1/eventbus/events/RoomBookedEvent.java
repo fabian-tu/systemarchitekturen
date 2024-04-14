@@ -1,15 +1,16 @@
 package at.fhv.lab1.eventbus.events;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class RoomBookedEvent extends Event {
-    private int bookingId;
-    private int customerId;
-    private int roomId;
+    private UUID bookingId;
+    private UUID customerId;
+    private UUID roomId;
     private Date startDate;
     private Date endDate;
 
-    public RoomBookedEvent(int bookingId, int customerId, int roomId, Date startDate, Date endDate) {
+    public RoomBookedEvent(UUID bookingId, UUID customerId, UUID roomId, Date startDate, Date endDate) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.roomId = roomId;
@@ -17,27 +18,27 @@ public class RoomBookedEvent extends Event {
         this.endDate = endDate;
     }
 
-    public int getBookingId() {
+    public UUID getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(UUID bookingId) {
         this.bookingId = bookingId;
     }
 
-    public int getCustomerId() {
+    public UUID getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(UUID customerId) {
         this.customerId = customerId;
     }
 
-    public int getRoomId() {
+    public UUID getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(UUID roomId) {
         this.roomId = roomId;
     }
 

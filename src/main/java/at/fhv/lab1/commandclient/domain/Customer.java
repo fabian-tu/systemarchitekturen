@@ -1,16 +1,15 @@
-package at.fhv.lab1.eventbus.events;
+package at.fhv.lab1.commandclient.domain;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class CustomerCreatedEvent extends Event {
+public class Customer {
     private UUID customerId;
     private String name;
     private String address;
     private Date dateOfBirth;
 
-    public CustomerCreatedEvent(UUID customerId, String name, String address, Date dateOfBirth) {
-        this.customerId = customerId;
+    public Customer(String name, String address, Date dateOfBirth) {
         this.name = name;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
@@ -20,7 +19,7 @@ public class CustomerCreatedEvent extends Event {
         return customerId;
     }
 
-    public void setCustomerIdId(UUID customerId) {
+    public void setCustomerId(UUID customerId) {
         this.customerId = customerId;
     }
 
@@ -51,12 +50,10 @@ public class CustomerCreatedEvent extends Event {
     @Override
     public String toString() {
         return "Customer{" +
-                "type=" + getType() +
-                ", customerId=" + customerId +
-                ", name=" + name +
-                ", address=" + address +
+                "customerId=" + customerId +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", timestamp=" + getTimestamp() +
                 '}';
     }
 }

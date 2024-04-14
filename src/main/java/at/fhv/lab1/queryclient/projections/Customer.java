@@ -1,27 +1,29 @@
-package at.fhv.lab1.commandclient.model;
+package at.fhv.lab1.queryclient.projections;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Customer {
-    private int id;
+    private UUID customerId;
     private String name;
     private String address;
     private Date dateOfBirth;
 
-    public Customer(String name, String address, Date dateOfBirth) {
+    public Customer(UUID customerId, String name, String address, Date dateOfBirth) {
+        this.customerId = customerId;
         this.name = name;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getId() {
-        return id;
+    public UUID getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerId(UUID customerId) {
+        this.customerId = customerId;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -49,7 +51,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "customerId=" + customerId +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
