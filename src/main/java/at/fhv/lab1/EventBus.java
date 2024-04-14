@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @SpringBootApplication
 @Configuration
@@ -22,7 +23,7 @@ public class EventBus {
     @Bean
     public CommandLineRunner run() throws Exception {
         return args -> {
-            RoomBookedEvent event = new RoomBookedEvent(123, 1, 1, new Date(), new Date());
+            RoomBookedEvent event = new RoomBookedEvent(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), LocalDate.parse("2023-04-05"), LocalDate.parse("2023-04-10"));
             System.out.println(event);
         };
     }

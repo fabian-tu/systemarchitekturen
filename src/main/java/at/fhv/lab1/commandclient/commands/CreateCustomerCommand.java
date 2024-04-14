@@ -1,13 +1,13 @@
 package at.fhv.lab1.commandclient.commands;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CreateCustomerCommand {
     private String name;
     private String address;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    public CreateCustomerCommand(String name, String address, Date dateOfBirth) {
+    public CreateCustomerCommand(String name, String address, LocalDate dateOfBirth) {
         this.name = name;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
@@ -29,11 +29,11 @@ public class CreateCustomerCommand {
         this.address = address;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -1,15 +1,15 @@
 package at.fhv.lab1.eventbus.events;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class CustomerCreatedEvent extends Event {
     private UUID customerId;
     private String name;
     private String address;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    public CustomerCreatedEvent(UUID customerId, String name, String address, Date dateOfBirth) {
+    public CustomerCreatedEvent(UUID customerId, String name, String address, LocalDate dateOfBirth) {
         this.customerId = customerId;
         this.name = name;
         this.address = address;
@@ -40,11 +40,11 @@ public class CustomerCreatedEvent extends Event {
         this.address = address;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

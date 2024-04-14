@@ -1,6 +1,6 @@
 package at.fhv.lab1.queryclient.projections;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class FreeRoom {
@@ -8,10 +8,10 @@ public class FreeRoom {
     private int roomNumber;
     private int beds;
     private float pricePerNight;
-    private Date availableFrom;
-    private Date availableTo;
+    private LocalDate availableFrom;
+    private LocalDate availableTo;
 
-    public FreeRoom(UUID roomId, int roomNumber, int beds, float pricePerNight, Date availableFrom, Date availableTo) {
+    public FreeRoom(UUID roomId, int roomNumber, int beds, float pricePerNight, LocalDate availableFrom, LocalDate availableTo) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.beds = beds;
@@ -52,19 +52,19 @@ public class FreeRoom {
         this.pricePerNight = pricePerNight;
     }
 
-    public Date getAvailableFrom() {
+    public LocalDate getAvailableFrom() {
         return availableFrom;
     }
 
-    public void setAvailableFrom(Date availableFrom) {
+    public void setAvailableFrom(LocalDate availableFrom) {
         this.availableFrom = availableFrom;
     }
 
-    public Date getAvailableTo() {
+    public LocalDate getAvailableTo() {
         return availableTo;
     }
 
-    public void setAvailableTo(Date availableTo) {
+    public void setAvailableTo(LocalDate availableTo) {
         this.availableTo = availableTo;
     }
 

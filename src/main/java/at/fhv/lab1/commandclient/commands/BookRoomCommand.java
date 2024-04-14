@@ -1,15 +1,15 @@
 package at.fhv.lab1.commandclient.commands;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class BookRoomCommand {
     private UUID customerId;
     private UUID roomId;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public BookRoomCommand(UUID customerId, UUID roomId, Date startDate, Date endDate) {
+    public BookRoomCommand(UUID customerId, UUID roomId, LocalDate startDate, LocalDate endDate) {
         this.customerId = customerId;
         this.roomId = roomId;
         this.startDate = startDate;
@@ -32,19 +32,19 @@ public class BookRoomCommand {
         this.roomId = roomId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

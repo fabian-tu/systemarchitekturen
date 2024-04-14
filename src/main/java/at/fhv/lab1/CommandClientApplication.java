@@ -18,8 +18,6 @@ public class CommandClientApplication {
 
     @Bean
     public CommandLineRunner run() throws Exception {
-        return args -> {
-            System.out.println("Hello World!");
-        };
+        return args -> System.out.println("Hello World!");
     }
 }
