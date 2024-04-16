@@ -27,7 +27,7 @@ public class DomainRepository {
         bookings.add(booking);
         System.out.println("Booking added: " + booking);
 
-        RoomBookedEvent event = new RoomBookedEvent(booking.getBookingId(), booking.getRoomId(), booking.getCustomerId(), booking.getStartDate(), booking.getEndDate());
+        RoomBookedEvent event = new RoomBookedEvent(booking.getBookingId(), booking.getCustomerId(), booking.getRoomId(), booking.getStartDate(), booking.getEndDate());
         eventPublisher.publishRoomBookedEvent(event);
     }
 
