@@ -1,9 +1,6 @@
 package at.fhv.lab1.eventbus;
 
-import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
-import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
-import at.fhv.lab1.eventbus.events.Event;
-import at.fhv.lab1.eventbus.events.RoomBookedEvent;
+import at.fhv.lab1.eventbus.events.*;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -38,6 +35,13 @@ public class EventRepository {
         writeEventToFile(event);
 
         publisher.publishCustomerCreatedEvent(event);
+    }
+
+    public void processRoomCreatedEvent(RoomCreatedEvent event) {
+        events.add(event);
+        writeEventToFile(event);
+
+        publisher.publishRoomCreatedEvent(event);
     }
 
     private void writeEventToFile(Event event) {

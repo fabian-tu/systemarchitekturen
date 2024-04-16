@@ -4,8 +4,10 @@ import at.fhv.lab1.commandclient.DomainRepository;
 import at.fhv.lab1.commandclient.commands.BookRoomCommand;
 import at.fhv.lab1.commandclient.commands.CancelBookingCommand;
 import at.fhv.lab1.commandclient.commands.CreateCustomerCommand;
+import at.fhv.lab1.commandclient.commands.CreateRoomCommand;
 import at.fhv.lab1.commandclient.domain.Booking;
 import at.fhv.lab1.commandclient.domain.Customer;
+import at.fhv.lab1.commandclient.domain.Room;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,11 @@ public class CommandRestController {
     public void createCustomer(@RequestBody CreateCustomerCommand command) {
         Customer customer = new Customer(command.getName(), command.getAddress(), command.getDateOfBirth());
         repository.createCustomer(customer);
+    }
+
+    @PostMapping(value = "/create-room", consumes = "application/json")
+    public void createRoom(@RequestBody CreateRoomCommand command) {
+        Room room = new Room(command.getRoomNumber(), command.getBeds(), command.getPricePerNight());
+        repository.addRoom(room);
     }
 }

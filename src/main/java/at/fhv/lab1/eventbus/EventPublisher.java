@@ -3,6 +3,7 @@ package at.fhv.lab1.eventbus;
 import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
 import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
 import at.fhv.lab1.eventbus.events.RoomBookedEvent;
+import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -47,6 +48,20 @@ public class EventPublisher {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(event), CustomerCreatedEvent.class)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+
+        System.out.println("Event published: " + event);
+    }
+
+    public void publishRoomCreatedEvent(RoomCreatedEvent event) {
+        localApiClient
+                .post()
+                .uri("/room-created-event")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(event), RoomCreatedEvent.class)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();

@@ -3,6 +3,7 @@ package at.fhv.lab1.queryclient.rest;
 import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
 import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
 import at.fhv.lab1.eventbus.events.RoomBookedEvent;
+import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
 import at.fhv.lab1.queryclient.EventHandler;
 import at.fhv.lab1.queryclient.ProjectionRepository;
 import at.fhv.lab1.queryclient.projections.Booking;
@@ -38,6 +39,11 @@ public class QueryRestController {
         handler.handleCustomerCreatedEvent(event);
     }
 
+    @PostMapping(value = "/room-created-event", consumes = "application/json")
+    public void roomCreatedEvent(@RequestBody RoomCreatedEvent event) {
+        handler.handleRoomCreatedEvent(event);
+    }
+
     @GetMapping(value = "/get-bookings", produces = "application/json")
     public List<Booking> getBookings(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
         return repository.getBookingsByDate(startDate, endDate);
@@ -56,7 +62,7 @@ public class QueryRestController {
         if (name != null) {
             return repository.getCustomersByName(name);
         }
-        
+
         return repository.getCustomers();
     }
 }

@@ -4,58 +4,65 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class CustomerCreatedEvent extends Event {
-    private UUID customerId;
-    private String name;
-    private String address;
-    private LocalDate dateOfBirth;
+  private UUID customerId;
+  private String name;
+  private String address;
+  private LocalDate dateOfBirth;
 
-    public CustomerCreatedEvent(UUID customerId, String name, String address, LocalDate dateOfBirth) {
-        this.customerId = customerId;
-        this.name = name;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
-    }
+  public CustomerCreatedEvent() {}
 
-    public UUID getCustomerId() {
-        return customerId;
-    }
+  public CustomerCreatedEvent(UUID customerId, String name, String address, LocalDate dateOfBirth) {
+    this.customerId = customerId;
+    this.name = name;
+    this.address = address;
+    this.dateOfBirth = dateOfBirth;
+  }
 
-    public void setCustomerIdId(UUID customerId) {
-        this.customerId = customerId;
-    }
+  public UUID getCustomerId() {
+    return customerId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setCustomerIdId(UUID customerId) {
+    this.customerId = customerId;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
 
-    @Override
-    public String toString() {
-        return "CustomerCreatedEvent{" +
-                "customerId=" + customerId +
-                ", name=" + name +
-                ", address=" + address +
-                ", dateOfBirth=" + dateOfBirth +
-                ", timestamp=" + getTimestamp() +
-                '}';
-    }
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  @Override
+  public String toString() {
+    return "CustomerCreatedEvent{"
+        + "customerId="
+        + customerId
+        + ", name="
+        + name
+        + ", address="
+        + address
+        + ", dateOfBirth="
+        + dateOfBirth
+        + ", timestamp="
+        + getTimestamp()
+        + '}';
+  }
 }

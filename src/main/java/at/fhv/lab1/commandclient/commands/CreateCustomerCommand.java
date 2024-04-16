@@ -3,46 +3,53 @@ package at.fhv.lab1.commandclient.commands;
 import java.time.LocalDate;
 
 public class CreateCustomerCommand {
-    private String name;
-    private String address;
-    private LocalDate dateOfBirth;
+  private String name;
+  private String address;
+  private LocalDate dateOfBirth;
 
-    public CreateCustomerCommand(String name, String address, LocalDate dateOfBirth) {
-        this.name = name;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
-    }
+  public CreateCustomerCommand() {}
 
-    public String getName() {
-        return name;
-    }
+  public CreateCustomerCommand(String name, String address, LocalDate dateOfBirth) {
+    this.name = name;
+    this.address = address;
+    this.dateOfBirth = dateOfBirth;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
 
-    @Override
-    public String toString() {
-        return "CreateCustomerCommand{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
-    }
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  @Override
+  public String toString() {
+    return "CreateCustomerCommand{"
+        + "name='"
+        + name
+        + '\''
+        + ", address='"
+        + address
+        + '\''
+        + ", dateOfBirth="
+        + dateOfBirth
+        + '}';
+  }
 }
