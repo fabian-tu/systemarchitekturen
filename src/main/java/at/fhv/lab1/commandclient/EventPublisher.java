@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class EventPublisher {
-    private final WebClient localApiClient = WebClient.create("http://localhost:8081");
+    private final WebClient localApiClient = WebClient.create("http://localhost:8082");
 
     public void publishRoomBookedEvent(RoomBookedEvent event) {
         localApiClient
@@ -22,6 +22,8 @@ public class EventPublisher {
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
+
+        System.out.println("Event published: " + event);
     }
 
     public void publishBookingCancelledEvent(BookingCancelledEvent event) {
@@ -34,6 +36,8 @@ public class EventPublisher {
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
+
+        System.out.println("Event published: " + event);
     }
 
     public void publishCustomerCreatedEvent(CustomerCreatedEvent event) {
@@ -46,5 +50,7 @@ public class EventPublisher {
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
+
+        System.out.println("Event published: " + event);
     }
 }

@@ -11,6 +11,7 @@ public class Booking {
     private LocalDate endDate;
 
     public Booking(UUID customerId, UUID roomId, LocalDate startDate, LocalDate endDate) {
+        this.bookingId = UUID.randomUUID();
         this.customerId = customerId;
         this.roomId = roomId;
         this.startDate = startDate;

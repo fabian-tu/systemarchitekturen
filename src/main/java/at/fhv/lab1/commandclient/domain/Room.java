@@ -9,6 +9,7 @@ public class Room {
     private float pricePerNight;
 
     public Room(int roomNumber, int beds, float pricePerNight) {
+        this.roomId = UUID.randomUUID();
         this.roomNumber = roomNumber;
         this.beds = beds;
         this.pricePerNight = pricePerNight;

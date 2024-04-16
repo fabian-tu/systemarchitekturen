@@ -10,6 +10,7 @@ public class Customer {
     private LocalDate dateOfBirth;
 
     public Customer(String name, String address, LocalDate dateOfBirth) {
+        this.customerId = UUID.randomUUID();
         this.name = name;
         this.address = address;
         this.dateOfBirth = dateOfBirth;

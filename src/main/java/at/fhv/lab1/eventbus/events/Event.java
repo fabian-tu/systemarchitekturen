@@ -1,12 +1,9 @@
 package at.fhv.lab1.eventbus.events;
 
-public class Event {
-    private final long timestamp = System.currentTimeMillis();
-    private final String type = this.getClass().getSimpleName();
+import java.io.Serializable;
 
-    public String getType() {
-        return type;
-    }
+public class Event implements Serializable {
+    private final long timestamp = System.currentTimeMillis();
 
     public long getTimestamp() {
         return timestamp;
@@ -15,7 +12,6 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "type=" + type +
                 "timestamp=" + timestamp +
                 '}';
     }

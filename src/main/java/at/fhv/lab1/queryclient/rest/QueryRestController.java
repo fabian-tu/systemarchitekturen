@@ -8,11 +8,9 @@ import at.fhv.lab1.queryclient.ProjectionRepository;
 import at.fhv.lab1.queryclient.projections.Booking;
 import at.fhv.lab1.queryclient.projections.Customer;
 import at.fhv.lab1.queryclient.projections.FreeRoom;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -41,17 +39,24 @@ public class QueryRestController {
     }
 
     @GetMapping(value = "/get-bookings", produces = "application/json")
-    public List<Booking> getBookings() {
-        return repository.getBookings();
+    public List<Booking> getBookings(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
+        return repository.getBookingsByDate(startDate, endDate);
     }
 
     @GetMapping(value = "/get-free-rooms", produces = "application/json")
-    public List<FreeRoom> getFreeRooms() {
-        return repository.getFreeRooms();
+    public List<FreeRoom> getFreeRooms(
+            @RequestParam LocalDate availableFrom,
+            @RequestParam LocalDate availableTo,
+            @RequestParam int numberOfBeds) {
+        return repository.getFreeRooms(availableFrom, availableTo, numberOfBeds);
     }
 
     @GetMapping(value = "/get-customers", produces = "application/json")
-    public List<Customer> getCustomers() {
+    public List<Customer> getCustomers(@RequestParam(required = false) String name) {
+        if (name != null) {
+            return repository.getCustomersByName(name);
+        }
+        
         return repository.getCustomers();
     }
 }

@@ -1,6 +1,6 @@
 package at.fhv.lab1.queryclient.projections;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class FreeRoom {
@@ -8,16 +8,15 @@ public class FreeRoom {
     private int roomNumber;
     private int beds;
     private float pricePerNight;
-    private LocalDate availableFrom;
-    private LocalDate availableTo;
+    private List<AvailabilityInterval> availabilityIntervals;
 
-    public FreeRoom(UUID roomId, int roomNumber, int beds, float pricePerNight, LocalDate availableFrom, LocalDate availableTo) {
+
+    public FreeRoom(UUID roomId, int roomNumber, int beds, float pricePerNight, List<AvailabilityInterval> availabilityIntervals) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.beds = beds;
         this.pricePerNight = pricePerNight;
-        this.availableFrom = availableFrom;
-        this.availableTo = availableTo;
+        this.availabilityIntervals = availabilityIntervals;
     }
 
     public UUID getRoomId() {
@@ -52,20 +51,12 @@ public class FreeRoom {
         this.pricePerNight = pricePerNight;
     }
 
-    public LocalDate getAvailableFrom() {
-        return availableFrom;
+    public List<AvailabilityInterval> getAvailabilityIntervals() {
+        return availabilityIntervals;
     }
 
-    public void setAvailableFrom(LocalDate availableFrom) {
-        this.availableFrom = availableFrom;
-    }
-
-    public LocalDate getAvailableTo() {
-        return availableTo;
-    }
-
-    public void setAvailableTo(LocalDate availableTo) {
-        this.availableTo = availableTo;
+    public void setAvailabilityIntervals(List<AvailabilityInterval> availabilityIntervals) {
+        this.availabilityIntervals = availabilityIntervals;
     }
 
     @Override
@@ -75,8 +66,7 @@ public class FreeRoom {
                 ", roomNumber=" + roomNumber +
                 ", beds=" + beds +
                 ", pricePerNight=" + pricePerNight +
-                ", availableFrom=" + availableFrom +
-                ", availableTo=" + availableTo +
+                ", availabilityIntervals=" + availabilityIntervals +
                 '}';
     }
 }

@@ -6,9 +6,7 @@ import at.fhv.lab1.eventbus.events.Event;
 import at.fhv.lab1.eventbus.events.RoomBookedEvent;
 import org.springframework.stereotype.Component;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,16 +41,29 @@ public class EventRepository {
     }
 
     private void writeEventToFile(Event event) {
-        String filename = "events.txt";
+        String filename = "events.dat";
 
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(filename, true);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(event);
-            objectOutputStream.close();
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(events);
+            System.out.println("Events saved successfully.");
         } catch (IOException e) {
-            System.out.println("An error occurred while appending objects to the file.");
             e.printStackTrace();
+        }
+
+        List<Event> readEvents = new ArrayList<>();
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            Object obj = in.readObject();
+            if (obj instanceof List) {
+                readEvents = (List<Event>) obj;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Events in file:");
+        for (Event e : readEvents) {
+            System.out.println(e);
         }
     }
 }

@@ -25,6 +25,7 @@ public class DomainRepository {
     public void addBooking(Booking booking) {
         booking.setBookingId(UUID.randomUUID());
         bookings.add(booking);
+        System.out.println("Booking added: " + booking);
 
         RoomBookedEvent event = new RoomBookedEvent(booking.getBookingId(), booking.getRoomId(), booking.getCustomerId(), booking.getStartDate(), booking.getEndDate());
         eventPublisher.publishRoomBookedEvent(event);
@@ -33,6 +34,7 @@ public class DomainRepository {
     public void cancelBooking(UUID bookingId) {
         Booking booking = bookings.stream().filter(b -> b.getBookingId() == bookingId).findFirst().orElse(null);
         bookings.remove(booking);
+        System.out.println("Booking cancelled: " + booking);
 
         if (booking != null) {
             BookingCancelledEvent event = new BookingCancelledEvent(booking.getBookingId());
@@ -43,8 +45,14 @@ public class DomainRepository {
     public void createCustomer(Customer customer) {
         customer.setCustomerId(UUID.randomUUID());
         customers.add(customer);
+        System.out.println("Customer created: " + customer);
 
         CustomerCreatedEvent event = new CustomerCreatedEvent(customer.getCustomerId(), customer.getName(), customer.getAddress(), customer.getDateOfBirth());
         eventPublisher.publishCustomerCreatedEvent(event);
+    }
+
+    public void addRoom(Room room) {
+        rooms.add(room);
+        System.out.println("Room added: " + room);
     }
 }
