@@ -8,11 +8,10 @@ import at.fhv.lab1.queryclient.projections.AvailabilityInterval;
 import at.fhv.lab1.queryclient.projections.Booking;
 import at.fhv.lab1.queryclient.projections.Customer;
 import at.fhv.lab1.queryclient.projections.FreeRoom;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Component
 public class EventHandler {
@@ -42,7 +41,7 @@ public class EventHandler {
         List<AvailabilityInterval> availabilityIntervals = new ArrayList<>();
         availabilityIntervals.add(new AvailabilityInterval(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)));
 
-        FreeRoom room = new FreeRoom(event.getRoomId(), event.getRoomNumber(), event.getBeds(), event.getPricePerNight(), availabilityIntervals);
+        FreeRoom room = new FreeRoom(event.getRoomId(), event.getRoomNumber(), event.getNumberOfBeds(), event.getPricePerNight(), availabilityIntervals);
 
         repository.addRoom(room);
     }

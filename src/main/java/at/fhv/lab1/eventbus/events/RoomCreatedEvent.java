@@ -5,15 +5,15 @@ import java.util.UUID;
 public class RoomCreatedEvent extends Event {
   private UUID roomId;
   private int roomNumber;
-  private int beds;
+  private int numberOfBeds;
   private float pricePerNight;
 
   public RoomCreatedEvent() {}
 
-  public RoomCreatedEvent(UUID roomId, int roomNumber, int beds, float pricePerNight) {
+  public RoomCreatedEvent(UUID roomId, int roomNumber, int numberOfBeds, float pricePerNight) {
     this.roomId = roomId;
     this.roomNumber = roomNumber;
-    this.beds = beds;
+    this.numberOfBeds = numberOfBeds;
     this.pricePerNight = pricePerNight;
   }
 
@@ -33,12 +33,12 @@ public class RoomCreatedEvent extends Event {
     this.roomNumber = roomNumber;
   }
 
-  public int getBeds() {
-    return beds;
+  public int getNumberOfBeds() {
+    return numberOfBeds;
   }
 
-  public void setBeds(int beds) {
-    this.beds = beds;
+  public void setNumberOfBeds(int numberOfBeds) {
+    this.numberOfBeds = numberOfBeds;
   }
 
   public float getPricePerNight() {
@@ -56,8 +56,8 @@ public class RoomCreatedEvent extends Event {
         + roomId
         + ", roomNumber="
         + roomNumber
-        + ", beds="
-        + beds
+        + ", numberOfBeds="
+        + numberOfBeds
         + ", pricePerNight="
         + pricePerNight
         + '}';

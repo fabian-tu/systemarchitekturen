@@ -2,14 +2,14 @@ package at.fhv.lab1.commandclient.commands;
 
 public class CreateRoomCommand {
   private int roomNumber;
-  private int beds;
+  private int numberOfBeds;
   private float pricePerNight;
 
   public CreateRoomCommand() {}
 
-  public CreateRoomCommand(int roomNumber, int beds, float pricePerNight) {
+  public CreateRoomCommand(int roomNumber, int numberOfBeds, float pricePerNight) {
     this.roomNumber = roomNumber;
-    this.beds = beds;
+    this.numberOfBeds = numberOfBeds;
     this.pricePerNight = pricePerNight;
   }
 
@@ -21,12 +21,12 @@ public class CreateRoomCommand {
     this.roomNumber = roomNumber;
   }
 
-  public int getBeds() {
-    return beds;
+  public int getNumberOfBeds() {
+    return numberOfBeds;
   }
 
-  public void setBeds(int beds) {
-    this.beds = beds;
+  public void setNumberOfBeds(int numberOfBeds) {
+    this.numberOfBeds = numberOfBeds;
   }
 
   public float getPricePerNight() {
@@ -42,8 +42,8 @@ public class CreateRoomCommand {
     return "CreatRoomCommand{"
         + "roomNumber="
         + roomNumber
-        + ", beds="
-        + beds
+        + ", numberOfBeds="
+        + numberOfBeds
         + ", pricePerNight="
         + pricePerNight
         + '}';
