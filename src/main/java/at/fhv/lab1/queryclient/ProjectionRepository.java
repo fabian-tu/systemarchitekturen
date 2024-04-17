@@ -128,4 +128,10 @@ public class ProjectionRepository {
   public List<Customer> getCustomersByName(String name) {
     return customers.stream().filter(c -> c.getName().equals(name)).toList();
   }
+
+  public void deleteQueryModels() {
+    bookings.clear();
+    customers.clear();
+    freeRooms.clear();
+  }
 }

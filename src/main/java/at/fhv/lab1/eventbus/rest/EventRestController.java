@@ -36,4 +36,9 @@ public class EventRestController {
   public void handleRoomCreatedEvent(@RequestBody RoomCreatedEvent event) {
     handler.handleRoomCreatedEvent(event);
   }
+
+  @PostMapping(value = "/restore-query-models", consumes = "application/json")
+  public void handleRestoreQueryModels() {
+    handler.handleRestoreQueryModels();
+  }
 }

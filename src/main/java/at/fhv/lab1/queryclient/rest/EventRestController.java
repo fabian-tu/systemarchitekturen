@@ -36,4 +36,9 @@ public class EventRestController {
   public void roomCreatedEvent(@RequestBody RoomCreatedEvent event) {
     handler.handleRoomCreatedEvent(event);
   }
+
+  @PostMapping(value = "/delete-query-models", consumes = "application/json")
+  public void deleteQueryModels() {
+    handler.handleDeleteQueryModels();
+  }
 }

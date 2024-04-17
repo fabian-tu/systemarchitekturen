@@ -32,8 +32,16 @@ public class DomainRepository {
     System.out.println("Customer added: " + customer);
   }
 
+  public List<Customer> getCustomers() {
+    return customers;
+  }
+
   public void addRoom(Room room) {
     rooms.add(room);
     System.out.println("Room added: " + room);
+  }
+
+  public List<Room> getRooms() {
+    return rooms;
   }
 }

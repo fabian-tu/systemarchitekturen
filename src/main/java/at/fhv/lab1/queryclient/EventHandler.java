@@ -15,34 +15,53 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EventHandler {
-    private final ProjectionRepository repository;
+  private final ProjectionRepository repository;
 
-    public EventHandler(ProjectionRepository repository) {
-        this.repository = repository;
-    }
+  public EventHandler(ProjectionRepository repository) {
+    this.repository = repository;
+  }
 
-    public void handleRoomBookedEvent(RoomBookedEvent event) {
-        Booking booking = new Booking(event.getBookingId(), event.getCustomerId(), event.getRoomId(), event.getStartDate(), event.getEndDate());
+  public void handleRoomBookedEvent(RoomBookedEvent event) {
+    Booking booking =
+        new Booking(
+            event.getBookingId(),
+            event.getCustomerId(),
+            event.getRoomId(),
+            event.getStartDate(),
+            event.getEndDate());
 
-        repository.addBooking(booking);
-    }
+    repository.addBooking(booking);
+  }
 
-    public void handleBookingCancelledEvent(BookingCancelledEvent event) {
-        repository.removeBooking(event.getBookingId());
-    }
+  public void handleBookingCancelledEvent(BookingCancelledEvent event) {
+    repository.removeBooking(event.getBookingId());
+  }
 
-    public void handleCustomerCreatedEvent(CustomerCreatedEvent event) {
-        Customer customer = new Customer(event.getCustomerId(), event.getName(), event.getAddress(), event.getDateOfBirth());
+  public void handleCustomerCreatedEvent(CustomerCreatedEvent event) {
+    Customer customer =
+        new Customer(
+            event.getCustomerId(), event.getName(), event.getAddress(), event.getDateOfBirth());
 
-        repository.addCustomer(customer);
-    }
+    repository.addCustomer(customer);
+  }
 
-    public void handleRoomCreatedEvent(RoomCreatedEvent event) {
-        List<AvailabilityInterval> availabilityIntervals = new ArrayList<>();
-        availabilityIntervals.add(new AvailabilityInterval(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)));
+  public void handleRoomCreatedEvent(RoomCreatedEvent event) {
+    List<AvailabilityInterval> availabilityIntervals = new ArrayList<>();
+    availabilityIntervals.add(
+        new AvailabilityInterval(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31)));
 
-        FreeRoom room = new FreeRoom(event.getRoomId(), event.getRoomNumber(), event.getNumberOfBeds(), event.getPricePerNight(), availabilityIntervals);
+    FreeRoom room =
+        new FreeRoom(
+            event.getRoomId(),
+            event.getRoomNumber(),
+            event.getNumberOfBeds(),
+            event.getPricePerNight(),
+            availabilityIntervals);
 
-        repository.addRoom(room);
-    }
+    repository.addRoom(room);
+  }
+
+  public void handleDeleteQueryModels() {
+    repository.deleteQueryModels();
+  }
 }

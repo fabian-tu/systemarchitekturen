@@ -35,4 +35,8 @@ public class EventHandler {
     repository.addRoomCreatedEvent(event);
     publisher.publishRoomCreatedEvent(event);
   }
+
+  public void handleRestoreQueryModels() {
+    // repository.getEvents();
+  }
 }
