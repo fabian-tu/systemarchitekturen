@@ -12,13 +12,12 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("at.fhv.lab1.eventbus")
 public class EventBusApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(EventBusApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(EventBusApplication.class, args);
+  }
 
-    @Bean
-    public CommandLineRunner run() throws Exception {
-        return args -> {
-        };
-    }
+  @Bean
+  public CommandLineRunner run() throws Exception {
+    return args -> {};
+  }
 }
