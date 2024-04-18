@@ -10,7 +10,6 @@ import at.fhv.lab1.eventbus.events.RoomBookedEvent;
 import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import at.fhv.lab1.util.CommandLineParser;
 
 @Component
 public class CommandHandler {
@@ -28,12 +27,13 @@ public class CommandHandler {
     List<Booking> bookings = repository.getBookings();
 
     if (rooms.stream().noneMatch(r -> r.getRoomId().equals(command.getRoomId()))) {
-      throw new IllegalArgumentException("Room with id " + command.getRoomId() + " not found");
+      System.out.println("Room with id " + command.getRoomId() + " not found");
+      return;
     }
 
     if (customers.stream().noneMatch(c -> c.getCustomerId().equals(command.getCustomerId()))) {
-      throw new IllegalArgumentException(
-          "Customer with id " + command.getCustomerId() + " not found");
+      System.out.println("Customer with id " + command.getCustomerId() + " not found");
+      return;
     }
 
     if (bookings.stream()
@@ -44,7 +44,8 @@ public class CommandHandler {
                             && !b.getStartDate().isAfter(command.getEndDate()))
                     || (!b.getEndDate().isBefore(command.getStartDate())
                         && !b.getEndDate().isAfter(command.getEndDate())))) {
-      throw new IllegalArgumentException("Room is already booked in this time frame");
+      System.out.println("Room is already booked in this time frame");
+      return;
     }
 
     Booking booking =
@@ -75,8 +76,8 @@ public class CommandHandler {
             .orElse(null);
 
     if (booking == null) {
-      throw new IllegalArgumentException(
-          "Booking with id " + command.getBookingId() + " not found");
+      System.out.println("Booking with id " + command.getBookingId() + " not found");
+      return;
     }
 
     repository.removeBooking(booking);
@@ -103,8 +104,8 @@ public class CommandHandler {
     List<Room> rooms = repository.getRooms();
 
     if (rooms.stream().anyMatch(r -> r.getRoomNumber() == command.getRoomNumber())) {
-      throw new IllegalArgumentException(
-          "Room with number " + command.getRoomNumber() + " already exists");
+      System.out.println("Room with number " + command.getRoomNumber() + " already exists");
+      return;
     }
 
     Room room =
@@ -116,12 +117,4 @@ public class CommandHandler {
             room.getRoomId(), room.getRoomNumber(), room.getBeds(), room.getPricePerNight());
     eventPublisher.publishRoomCreatedEvent(event);
   }
-  public void handleClearQueryModelsCommand(ClearQueryModelsCommand command) {
-    eventPublisher.publishClearQueryModelsEvent();
-  }
-
-  public void handleRestoreEventsCommand(RestoreEventsCommand command) {
-    eventPublisher.publishRestoreEvents();
-  }
-
 }

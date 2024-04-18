@@ -52,7 +52,9 @@ public class RoomCreatedEvent extends Event {
   @Override
   public String toString() {
     return "RoomCreatedEvent{"
-        + "roomId="
+        + "type="
+        + getType()
+        + ", roomId="
         + roomId
         + ", roomNumber="
         + roomNumber

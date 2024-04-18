@@ -1,9 +1,8 @@
 package at.fhv.lab1.eventbus;
 
 import at.fhv.lab1.eventbus.events.*;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Component
 public class EventHandler {
@@ -35,13 +34,19 @@ public class EventHandler {
     publisher.publishRoomCreatedEvent(event);
   }
 
-  public void handleRestoreQueryModels() {
-    // repository.getEvents();
-  }
   public void handleRestoreEvents() {
-    List<Event> events = EventRepository.getAllEvents();
+    List<Event> events = repository.getEvents();
+
     for (Event event : events) {
       publisher.publishEventToQueryClient(event);
     }
+
+    System.out.println("Events restored");
+  }
+
+  public List<Event> handleGetEvents() {
+    System.out.println("Events requested");
+
+    return repository.getEvents();
   }
 }

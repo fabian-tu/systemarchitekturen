@@ -30,6 +30,10 @@ public class EventRepository {
     writeEventToFile();
   }
 
+  public List<Event> getEvents() {
+    return events;
+  }
+
   private void writeEventToFile() {
     String filename = "events.dat";
 
@@ -55,9 +59,5 @@ public class EventRepository {
     for (Event e : readEvents) {
       System.out.println(e);
     }
-  }
-
-  public static List<Event> getAllEvents() {
-    return events;
   }
 }

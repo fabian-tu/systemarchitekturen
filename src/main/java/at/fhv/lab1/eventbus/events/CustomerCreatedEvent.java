@@ -53,7 +53,9 @@ public class CustomerCreatedEvent extends Event {
   @Override
   public String toString() {
     return "CustomerCreatedEvent{"
-        + "customerId="
+        + "type="
+        + getType()
+        + ", customerId="
         + customerId
         + ", name="
         + name

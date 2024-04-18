@@ -44,10 +44,8 @@ public class CreateCustomerCommand {
     return "CreateCustomerCommand{"
         + "name='"
         + name
-        + '\''
         + ", address='"
         + address
-        + '\''
         + ", dateOfBirth="
         + dateOfBirth
         + '}';

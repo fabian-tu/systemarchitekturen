@@ -13,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @Configuration
@@ -27,6 +30,9 @@ public class CommandClientApplication {
   private final CommandHandler handler;
   private final DomainRepository repository;
 
+  private final WebClient eventBus = WebClient.create("http://localhost:8082");
+  private final WebClient queryClient = WebClient.create("http://localhost:8083");
+
   public CommandClientApplication(CommandHandler handler, DomainRepository repository) {
     this.handler = handler;
     this.repository = repository;
@@ -34,6 +40,23 @@ public class CommandClientApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(CommandClientApplication.class, args);
+  }
+
+  private static List<String> parseArguments(String input) {
+    List<String> arguments = new ArrayList<>();
+    Matcher matcher = Pattern.compile("\"([^\"]*)\"|\\S+").matcher(input);
+
+    while (matcher.find()) {
+      if (matcher.group(1) != null) {
+        // Quoted argument found
+        arguments.add(matcher.group(1));
+      } else {
+        // Unquoted argument found
+        arguments.add(matcher.group());
+      }
+    }
+
+    return arguments;
   }
 
   @Bean
@@ -50,10 +73,8 @@ public class CommandClientApplication {
           break;
         }
 
-        String[] tokens = input.split("\\s+"); // Split input by whitespace
-        String command = tokens[0];
-        String[] arguments = new String[tokens.length - 1];
-        System.arraycopy(tokens, 1, arguments, 0, arguments.length);
+        List<String> arguments = parseArguments(input);
+        String command = arguments.remove(0);
 
         switch (command) {
           case "load-test-data":
@@ -62,20 +83,56 @@ public class CommandClientApplication {
           case "book-room":
             handler.handleBookRoomCommand(
                 new BookRoomCommand(
-                    UUID.fromString(arguments[0]),
-                    UUID.fromString(arguments[1]),
-                    LocalDate.parse(arguments[2]),
-                    LocalDate.parse(arguments[3])));
+                    UUID.fromString(arguments.get(0)),
+                    UUID.fromString(arguments.get(1)),
+                    LocalDate.parse(arguments.get(2)),
+                    LocalDate.parse(arguments.get(3))));
             break;
           case "cancel-booking":
             handler.handleCancelBookingCommand(
-                new CancelBookingCommand(UUID.fromString(arguments[0])));
+                new CancelBookingCommand(UUID.fromString(arguments.get(0))));
+            break;
           case "create-customer":
             handler.handleCreateCustomerCommand(
                 new CreateCustomerCommand(
-                    arguments[0], arguments[1], LocalDate.parse(arguments[2])));
+                    arguments.get(0), arguments.get(1), LocalDate.parse(arguments.get(2))));
+            break;
+          case "create-room":
+            handler.handleCreateRoomCommand(
+                new CreateRoomCommand(
+                    Integer.parseInt(arguments.get(0)),
+                    Integer.parseInt(arguments.get(1)),
+                    Float.parseFloat(arguments.get(2))));
             break;
           case "delete-query-models":
+            queryClient
+                .post()
+                .uri("/delete-query-models")
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+
+            System.out.println("Query models deleted.");
+            break;
+          case "restore-query-models":
+            eventBus.post().uri("/restore-query-models").retrieve().bodyToMono(Void.class).block();
+
+            System.out.println("Query models restored.");
+            break;
+          case "get-events":
+            List<Object> events =
+                eventBus
+                    .get()
+                    .uri("/get-events")
+                    .retrieve()
+                    .bodyToFlux(Object.class)
+                    .collectList()
+                    .block();
+
+            for (Object event : events) {
+              System.out.println(event);
+            }
+
             break;
           default:
             System.out.println("Invalid command. Please try again.");

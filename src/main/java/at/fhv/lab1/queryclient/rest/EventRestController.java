@@ -32,13 +32,14 @@ public class EventRestController {
     handler.handleCustomerCreatedEvent(event);
   }
 
-  @PostMapping(value = "/room-created-event", consumes = "application/json")
+  @PostMapping(value = "/room-created-event")
   public void roomCreatedEvent(@RequestBody RoomCreatedEvent event) {
     handler.handleRoomCreatedEvent(event);
   }
 
-  @PostMapping(value = "/delete-query-models", consumes = "application/json")
+  @PostMapping(value = "/delete-query-models")
   public void deleteQueryModels() {
     handler.handleDeleteQueryModels();
+    System.out.println("Query models deleted.");
   }
 }

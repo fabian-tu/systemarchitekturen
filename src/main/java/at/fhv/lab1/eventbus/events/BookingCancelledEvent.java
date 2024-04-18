@@ -22,7 +22,9 @@ public class BookingCancelledEvent extends Event {
   @Override
   public String toString() {
     return "BookingCancelledEvent{"
-        + "bookingId="
+        + "type="
+        + getType()
+        + ", bookingId="
         + bookingId
         + ", timestamp="
         + getTimestamp()

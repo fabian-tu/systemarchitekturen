@@ -1,10 +1,9 @@
 package at.fhv.lab1.eventbus.rest;
 
 import at.fhv.lab1.eventbus.EventHandler;
-import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
-import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
-import at.fhv.lab1.eventbus.events.RoomBookedEvent;
-import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
+import at.fhv.lab1.eventbus.events.*;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,13 +36,13 @@ public class EventRestController {
     handler.handleRoomCreatedEvent(event);
   }
 
-  @PostMapping(value = "/restore-query-models", consumes = "application/json")
+  @PostMapping(value = "/restore-query-models")
   public void handleRestoreQueryModels() {
-    handler.handleRestoreQueryModels();
+    handler.handleRestoreEvents();
   }
 
-  @PostMapping(value = "/restore-events")
-  public void restoreEvents(){
-    handler.handleRestoreEvents();
+  @GetMapping(value = "/get-events")
+  public List<Event> handleGetEvents() {
+    return handler.handleGetEvents();
   }
 }

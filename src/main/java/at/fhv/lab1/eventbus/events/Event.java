@@ -3,16 +3,19 @@ package at.fhv.lab1.eventbus.events;
 import java.io.Serializable;
 
 public class Event implements Serializable {
-    private final long timestamp = System.currentTimeMillis();
+  private final String type = this.getClass().getSimpleName();
+  private final long timestamp = System.currentTimeMillis();
 
-    public long getTimestamp() {
-        return timestamp;
-    }
+  public String getType() {
+    return type;
+  }
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "timestamp=" + timestamp +
-                '}';
-    }
+  public long getTimestamp() {
+    return timestamp;
+  }
+
+  @Override
+  public String toString() {
+    return "Event{" + "type='" + type + "timestamp=" + timestamp + '}';
+  }
 }
