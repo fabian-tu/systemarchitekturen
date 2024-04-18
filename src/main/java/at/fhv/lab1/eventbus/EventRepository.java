@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EventRepository {
-  private final List<Event> events = new ArrayList<>();
+  private static final List<Event> events = new ArrayList<>();
 
   public void addRoomBookedEvent(RoomBookedEvent event) {
     events.add(event);
@@ -55,5 +55,9 @@ public class EventRepository {
     for (Event e : readEvents) {
       System.out.println(e);
     }
+  }
+
+  public static List<Event> getAllEvents() {
+    return events;
   }
 }

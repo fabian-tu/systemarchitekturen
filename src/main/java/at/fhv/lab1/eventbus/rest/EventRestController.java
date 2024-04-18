@@ -41,4 +41,9 @@ public class EventRestController {
   public void handleRestoreQueryModels() {
     handler.handleRestoreQueryModels();
   }
+
+  @PostMapping(value = "/restore-events")
+  public void restoreEvents(){
+    handler.handleRestoreEvents();
+  }
 }

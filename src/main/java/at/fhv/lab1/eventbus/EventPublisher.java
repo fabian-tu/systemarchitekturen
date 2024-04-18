@@ -1,9 +1,6 @@
 package at.fhv.lab1.eventbus;
 
-import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
-import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
-import at.fhv.lab1.eventbus.events.RoomBookedEvent;
-import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
+import at.fhv.lab1.eventbus.events.*;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -67,5 +64,39 @@ public class EventPublisher {
                 .block();
 
         System.out.println("Event published: " + event);
+    }
+
+    public void publishEventToQueryClient(Event event) {
+
+        String uri = determineUriBasedOnEventType(event);
+        localApiClient
+                .post()
+                .uri(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(event), event.getClass())
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+    }
+
+    private String determineUriBasedOnEventType(Event event) {
+        if(event instanceof RoomBookedEvent){
+            return "/room-booked-event";
+        }
+        if(event instanceof CustomerCreatedEvent){
+            return "/customer-created-event";
+        }
+        if(event instanceof RoomCreatedEvent){
+            return "/room-created-event";
+        }
+        if(event instanceof CustomerCreatedEvent){
+            return "/customer-created-event";
+        }
+
+        if(event instanceof BookingCancelledEvent){
+            return "/booking-cancelled-event";
+        }
+        throw new IllegalArgumentException("No matching event type: " + event.getClass());
     }
 }

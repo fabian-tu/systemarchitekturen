@@ -1,9 +1,6 @@
 package at.fhv.lab1.commandclient;
 
-import at.fhv.lab1.commandclient.commands.BookRoomCommand;
-import at.fhv.lab1.commandclient.commands.CancelBookingCommand;
-import at.fhv.lab1.commandclient.commands.CreateCustomerCommand;
-import at.fhv.lab1.commandclient.commands.CreateRoomCommand;
+import at.fhv.lab1.commandclient.commands.*;
 import at.fhv.lab1.commandclient.domain.Booking;
 import at.fhv.lab1.commandclient.domain.Customer;
 import at.fhv.lab1.commandclient.domain.Room;
@@ -13,6 +10,7 @@ import at.fhv.lab1.eventbus.events.RoomBookedEvent;
 import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
 import java.util.List;
 import org.springframework.stereotype.Component;
+import at.fhv.lab1.util.CommandLineParser;
 
 @Component
 public class CommandHandler {
@@ -118,4 +116,12 @@ public class CommandHandler {
             room.getRoomId(), room.getRoomNumber(), room.getBeds(), room.getPricePerNight());
     eventPublisher.publishRoomCreatedEvent(event);
   }
+  public void handleClearQueryModelsCommand(ClearQueryModelsCommand command) {
+    eventPublisher.publishClearQueryModelsEvent();
+  }
+
+  public void handleRestoreEventsCommand(RestoreEventsCommand command) {
+    eventPublisher.publishRestoreEvents();
+  }
+
 }

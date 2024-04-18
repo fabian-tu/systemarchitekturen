@@ -68,4 +68,26 @@ public class EventPublisher {
 
         System.out.println("Event published: " + event);
     }
+
+    public void publishClearQueryModelsEvent() {
+        localApiClient
+                .post()
+                .uri("/delete-query-models")
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+
+        System.out.println("Clear Query Models event published");
+    }
+
+    public void publishRestoreEvents(){
+        localApiClient
+                .post()
+                .uri("/restore-events")
+                .retrieve()
+                .bodyToMono(Void.class)
+                .block();
+
+        System.out.println("Restore Events command published");
+    }
 }

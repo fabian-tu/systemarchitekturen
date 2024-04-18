@@ -1,10 +1,9 @@
 package at.fhv.lab1.eventbus;
 
-import at.fhv.lab1.eventbus.events.BookingCancelledEvent;
-import at.fhv.lab1.eventbus.events.CustomerCreatedEvent;
-import at.fhv.lab1.eventbus.events.RoomBookedEvent;
-import at.fhv.lab1.eventbus.events.RoomCreatedEvent;
+import at.fhv.lab1.eventbus.events.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class EventHandler {
@@ -38,5 +37,11 @@ public class EventHandler {
 
   public void handleRestoreQueryModels() {
     // repository.getEvents();
+  }
+  public void handleRestoreEvents() {
+    List<Event> events = EventRepository.getAllEvents();
+    for (Event event : events) {
+      publisher.publishEventToQueryClient(event);
+    }
   }
 }
